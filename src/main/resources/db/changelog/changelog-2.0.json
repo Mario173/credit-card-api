@@ -1,0 +1,36 @@
+{
+  "databaseChangeLog": [
+    {
+      "changeSet": {
+        "id": "2",
+        "author": "mario",
+        "changes": [
+          {
+            "renameColumn": {
+              "tableName": "credit_card_application",
+              "oldColumnName": "credit_card_applicator_name",
+              "newColumnName": "credit_card_applicant_name",
+              "columnDataType": "VARCHAR(255)"
+            }
+          },
+          {
+            "renameColumn": {
+              "tableName": "credit_card_application",
+              "oldColumnName": "credit_card_applicator_surname",
+              "newColumnName": "credit_card_applicant_surname",
+              "columnDataType": "VARCHAR(255)"
+            }
+          },
+          {
+            "renameColumn": {
+              "tableName": "credit_card_application",
+              "oldColumnName": "credit_card_applicator_id",
+              "newColumnName": "credit_card_applicant_id",
+              "columnDataType": "CHAR(11)"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
