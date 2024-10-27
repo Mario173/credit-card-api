@@ -4,7 +4,6 @@ import com.credit.card.api.entity.CreditCardApplication;
 import com.credit.card.api.exception.DuplicateEntryException;
 import com.credit.card.api.exception.EntityNotFoundException;
 import com.credit.card.api.repository.CreditCardApplicationRepository;
-import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -79,8 +78,12 @@ public class CreditCardApplicationService {
      * @param creditCardApplication credit card application to update
      * @return updated credit card application
      */
-    public CreditCardApplication updateCreditCardApplicationByPersonalId(@Valid CreditCardApplication creditCardApplication) {
+    public CreditCardApplication updateCreditCardApplicationByPersonalId(String id, CreditCardApplication creditCardApplication) {
         validatePersonalId(creditCardApplication.getCreditCardApplicantId());
+        if (!id.equals(creditCardApplication.getCreditCardApplicantId())) {
+            log.error("Personal ID in the path and in the request body do not match.");
+            throw new IllegalArgumentException("Personal ID in the path and in the request body do not match.");
+        }
 
         CreditCardApplication updatedCreditCardApplication =
                 creditCardApplicationRepository.updateCreditCardApplicationByPersonalId(creditCardApplication);

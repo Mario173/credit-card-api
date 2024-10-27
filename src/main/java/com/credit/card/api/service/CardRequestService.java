@@ -22,6 +22,11 @@ public class CardRequestService {
 
     private static final String BASE_URL = "https://api.something.com/v1/api/v1/card-request";
 
+    /**
+     * Constructor for CardRequestService
+     *
+     * @param restTemplate rest template
+     */
     public CardRequestService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }

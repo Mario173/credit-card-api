@@ -99,7 +99,7 @@ public class CreditCardApplicationController {
             @Valid @RequestBody CreditCardApplication creditCardApplication
     ) {
         log.info("Updating credit card application: {}", creditCardApplication);
-        return ResponseEntity.ok(creditCardApplicationService.updateCreditCardApplicationByPersonalId(creditCardApplication));
+        return ResponseEntity.ok(creditCardApplicationService.updateCreditCardApplicationByPersonalId(id, creditCardApplication));
     }
 
     /**
