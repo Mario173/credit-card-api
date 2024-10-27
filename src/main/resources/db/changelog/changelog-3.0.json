@@ -1,0 +1,29 @@
+{
+  "databaseChangeLog": [
+    {
+      "changeSet": {
+        "id": "2",
+        "author": "mario",
+        "changes": [
+          {
+            "dropColumn": {
+              "columnName": "credit_card_application_id",
+              "tableName": "credit_card_application"
+            }
+          },
+          {
+            "dropPrimaryKey": {
+              "tableName": "credit_card_application"
+            }
+          },
+          {
+            "addPrimaryKey": {
+              "columnNames": "credit_card_applicant_id",
+              "tableName": "credit_card_application"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

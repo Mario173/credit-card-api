@@ -1,9 +1,12 @@
 package com.credit.card.api.service;
 
 import com.credit.card.api.entity.CreditCardApplication;
+import com.credit.card.api.exception.DuplicateEntryException;
 import com.credit.card.api.exception.EntityNotFoundException;
 import com.credit.card.api.repository.CreditCardApplicationRepository;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +19,7 @@ import java.util.List;
 @Service
 public class CreditCardApplicationService {
 
-    private CreditCardApplicationRepository creditCardApplicationRepository;
+    private final CreditCardApplicationRepository creditCardApplicationRepository;
 
     /**
      * Constructor for CreditCardService
@@ -54,6 +57,58 @@ public class CreditCardApplicationService {
     }
 
     /**
+     * Method used to add a credit card application
+     *
+     * @param creditCardApplication credit card application to add
+     * @return added credit card application
+     */
+    public CreditCardApplication addCreditCardApplication(CreditCardApplication creditCardApplication) {
+        validatePersonalId(creditCardApplication.getCreditCardApplicantId());
+
+        try {
+            return creditCardApplicationRepository.addCreditCardApplication(creditCardApplication);
+        } catch (DuplicateKeyException e) {
+            log.error("Failed to add credit card application.");
+            throw new DuplicateEntryException("An entry with the given personal id already exists.");
+        }
+    }
+
+    /**
+     * Method used to update a credit card application
+     *
+     * @param creditCardApplication credit card application to update
+     * @return updated credit card application
+     */
+    public CreditCardApplication updateCreditCardApplicationByPersonalId(@Valid CreditCardApplication creditCardApplication) {
+        validatePersonalId(creditCardApplication.getCreditCardApplicantId());
+
+        CreditCardApplication updatedCreditCardApplication =
+                creditCardApplicationRepository.updateCreditCardApplicationByPersonalId(creditCardApplication);
+        if (updatedCreditCardApplication == null) {
+            log.error("No credit card application with given personal ID was found.");
+            throw new EntityNotFoundException("No credit card application with given personal id was found.");
+        }
+
+        return updatedCreditCardApplication;
+    }
+
+    /**
+     * Method used to delete a credit card application by the applicant's ID
+     *
+     * @param id applicant's ID
+     */
+    public void deleteCreditCardApplicationByPersonalId(String id) {
+        validatePersonalId(id);
+
+        int numberOfDeletedRecords = creditCardApplicationRepository.deleteCreditCardApplicationByPersonalId(id);
+
+        if (numberOfDeletedRecords == 0) {
+            log.error("No credit card application with given personal ID was found.");
+            throw new EntityNotFoundException("No credit card application with given personal id was found.");
+        }
+    }
+
+    /**
      * Method used to validate the personal ID
      *
      * @param id personal ID
@@ -76,5 +131,4 @@ public class CreditCardApplicationService {
             throw new IllegalArgumentException("Personal ID contains non-numeric characters.");
         }
     }
-
 }
