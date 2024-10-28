@@ -23,7 +23,7 @@ The Credit Card API is a Spring Boot application that provides endpoints for man
 ### Installation
 1. Clone the repository:
     ```sh
-    git clone https://github.com/your-username/credit-card-api.git
+    git clone git@github.com:Mario173/credit-card-api.git
     cd credit-card-api
     ```
 
@@ -50,11 +50,12 @@ The application uses Liquibase for database migrations. The changelog files are 
 ## Endpoints
 The API provides the following endpoints:  
 
-- <b style="color:orange;">GET /applications</b> - Retrieve all credit card applications
-- <b style="color:orange;">GET /applications/{id}</b> - Retrieve a specific credit card application by ID
-- <b style="color:orange;">POST /applications</b> - Create a new credit card application
-- <b style="color:orange;">PUT /applications/{id}</b> - Update an existing credit card application by ID
-- <b style="color:orange;">DELETE /applications/{id}</b> - Delete a credit card application by ID
+- <b style="color:orange;">GET /credit/card/applications</b> - Retrieve all credit card applications
+- <b style="color:orange;">GET /credit/card/applications/{id}</b> - Retrieve a specific credit card application by ID
+- <b style="color:orange;">POST /credit/card/applications</b> - Create a new credit card application
+- <b style="color:orange;">PUT /credit/card/applications/{id}</b> - Update an existing credit card application by ID
+- <b style="color:orange;">DELETE /credit/card/applications/{id}</b> - Delete a credit card application by ID
+- <b style="color:orange;">POST /credit/card/applications/send-card-request/{id}</b> - Find a credit card application by ID and send a card request
 
 ## Validation
 The application includes validation to ensure that the personal ID in the path and the request body match. If they do not match, an error is logged and an IllegalArgumentException is thrown.
