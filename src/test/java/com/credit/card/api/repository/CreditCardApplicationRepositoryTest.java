@@ -2,6 +2,7 @@ package com.credit.card.api.repository;
 
 import com.credit.card.api.AbstractUnitTest;
 import com.credit.card.api.entity.CreditCardApplication;
+import com.credit.card.api.entity.Status;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -52,7 +53,7 @@ class CreditCardApplicationRepositoryTest extends AbstractUnitTest {
                 .creditCardApplicantId("12345678901")
                 .creditCardApplicantName("John")
                 .creditCardApplicantSurname("Doe")
-                .creditCardApplicationStatus("APPROVED")
+                .creditCardApplicationStatus(Status.APPROVED)
                 .build();
 
         creditCardApplications = Collections.singletonList(creditCardApplication);

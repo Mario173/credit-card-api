@@ -23,6 +23,6 @@ public class CreditCardApplication {
     private String creditCardApplicantId;
 
     @NotNull(message = "Application status is required")
-    private String creditCardApplicationStatus;
+    private Status creditCardApplicationStatus;
 
 }

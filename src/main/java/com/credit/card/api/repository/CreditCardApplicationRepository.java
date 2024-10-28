@@ -1,6 +1,7 @@
 package com.credit.card.api.repository;
 
 import com.credit.card.api.entity.CreditCardApplication;
+import com.credit.card.api.entity.Status;
 import jakarta.validation.Valid;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.JdbcClient;
@@ -22,7 +23,7 @@ public class CreditCardApplicationRepository {
             .creditCardApplicantName(rs.getString("credit_card_applicant_name"))
             .creditCardApplicantSurname(rs.getString("credit_card_applicant_surname"))
             .creditCardApplicantId(rs.getString("credit_card_applicant_id"))
-            .creditCardApplicationStatus(rs.getString("credit_card_application_status"))
+            .creditCardApplicationStatus(Status.fromValue(rs.getString("credit_card_application_status")))
             .build();
 
     /**
@@ -76,7 +77,7 @@ public class CreditCardApplicationRepository {
                 .param("name", creditCardApplication.getCreditCardApplicantName())
                 .param("surname", creditCardApplication.getCreditCardApplicantSurname())
                 .param("id", creditCardApplication.getCreditCardApplicantId())
-                .param("status", creditCardApplication.getCreditCardApplicationStatus())
+                .param("status", creditCardApplication.getCreditCardApplicationStatus().getValue())
                 .update(keyHolder);
 
         if (keyHolder.getKey() == null) {
@@ -92,6 +93,12 @@ public class CreditCardApplicationRepository {
                 .build();
     }
 
+    /**
+     * Method to update a credit card application
+     *
+     * @param creditCardApplication credit card application to update
+     * @return updated credit card application
+     */
     public CreditCardApplication updateCreditCardApplicationByPersonalId(@Valid CreditCardApplication creditCardApplication) {
         String query = "UPDATE credit_card_application SET credit_card_applicant_name = :name, "
                 + " credit_card_applicant_surname = :surname, credit_card_application_status = :status "
@@ -100,7 +107,7 @@ public class CreditCardApplicationRepository {
         int numberUpdated = jdbcClient.sql(query)
                 .param("name", creditCardApplication.getCreditCardApplicantName())
                 .param("surname", creditCardApplication.getCreditCardApplicantSurname())
-                .param("status", creditCardApplication.getCreditCardApplicationStatus())
+                .param("status", creditCardApplication.getCreditCardApplicationStatus().getValue())
                 .param("id", creditCardApplication.getCreditCardApplicantId())
                 .update();
 

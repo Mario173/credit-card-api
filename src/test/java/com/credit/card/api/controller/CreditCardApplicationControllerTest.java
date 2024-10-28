@@ -3,6 +3,7 @@ package com.credit.card.api.controller;
 import com.credit.card.api.AbstractUnitTest;
 import com.credit.card.api.entity.CreditCardApplication;
 import com.credit.card.api.entity.NewCardRequest;
+import com.credit.card.api.entity.Status;
 import com.credit.card.api.mapper.CreditCardApplicationMapper;
 import com.credit.card.api.service.CardRequestService;
 import com.credit.card.api.service.CreditCardApplicationService;
@@ -50,7 +51,7 @@ class CreditCardApplicationControllerTest extends AbstractUnitTest {
                 .creditCardApplicantId("12345678901")
                 .creditCardApplicantName("John")
                 .creditCardApplicantSurname("Doe")
-                .creditCardApplicationStatus("APPROVED")
+                .creditCardApplicationStatus(Status.APPROVED)
                 .build();
 
         creditCardApplications = Collections.singletonList(creditCardApplication);
@@ -59,7 +60,7 @@ class CreditCardApplicationControllerTest extends AbstractUnitTest {
                 .oib("12345678901")
                 .firstName("John")
                 .lastName("Doe")
-                .status("APPROVED")
+                .status(Status.APPROVED)
                 .build();
     }
 

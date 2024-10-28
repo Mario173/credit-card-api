@@ -22,7 +22,7 @@ public class NewCardRequest {
     private String lastName;
 
     @NotNull
-    private String status;
+    private Status status;
 
     @NotNull
     private String oib;

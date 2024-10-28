@@ -2,6 +2,7 @@ package com.credit.card.api.service;
 
 import com.credit.card.api.AbstractUnitTest;
 import com.credit.card.api.entity.CreditCardApplication;
+import com.credit.card.api.entity.Status;
 import com.credit.card.api.exception.DuplicateEntryException;
 import com.credit.card.api.exception.EntityNotFoundException;
 import com.credit.card.api.repository.CreditCardApplicationRepository;
@@ -45,7 +46,7 @@ class CreditCardApplicationServiceTest extends AbstractUnitTest {
                 .creditCardApplicantId("12345678901")
                 .creditCardApplicantName("John")
                 .creditCardApplicantSurname("Doe")
-                .creditCardApplicationStatus("APPROVED")
+                .creditCardApplicationStatus(Status.APPROVED)
                 .build();
 
         creditCardApplications = Collections.singletonList(creditCardApplication);
